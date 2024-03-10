@@ -1,0 +1,22 @@
+Grupo;ID;Nombre;Taller 1;Taller 2
+G3;334;Aguilar,Maria;5;5
+G5;444;Rogriiguez,José;4;3
+G6;111;Blanco,Alexandra;3;4
+G3;123;Bolivar,Elizabeth;2.5;5
+G6;102;Burgos,Daniel;5;5
+G5;400;Castro,Gladys;4;4
+G4;241;Rincón,Juan;2;4
+G8;231;Herrera,Carolina;2;2
+G1;222;Dominguez,Marianna;2.9;5
+G7;456;Morales,Santiago;3.4;4.2
+GE;665;Marrero,Alejandro;3.4;4.1
+G7;126;Meneses,Enrique;5;4.7
+GB;870;Rodriguez,Andres;5;4.8
+G3;45;Sanchez,Liliana;4;5
+G2;2;Soto,Diego;4;3.8
+G4;887;Tineo,Luca;3;3.8
+G4;665;Rosales,Juan Daniel;3.8;4.8
+G2;889;VARGAS,Teresa;3.8;4.7
+G8;990;Vasquez Sanchez,Santiago;4.8;4.5
+G2;997;Vera,Lilia;4.7;5
+G7;995;Cabrales,Elisa;4.5;5
