@@ -3,7 +3,7 @@ import students_pb2
 import students_pb2_grpc
 
 def run():
-    channel = grpc.insecure_channel('localhost:50051')  # Replace with the server's IP address
+    channel = grpc.insecure_channel('localhost:50020')  # Replace with the server's IP address
     stub = students_pb2_grpc.StudentServiceStub(channel)
     
     # Call GetName method
