@@ -2,24 +2,34 @@ syntax = "proto3";
 
 package students;
 
+// Student grade management service
 service StudentService {
+    // Get student name by ID
     rpc GetName(StudentID) returns (NameResponse) {}
+
+    // Get student average grade by ID
     rpc GetAverage(StudentID) returns (AverageResponse) {}
+
+    // Get student group by ID
     rpc GetGroup(StudentID) returns (GroupResponse) {}
 }
 
+// Student ID message
 message StudentID {
     int32 id = 1;
 }
 
+// Student name response message
 message NameResponse {
     string full_name = 1;
 }
 
+// Student average grade response message
 message AverageResponse {
     float average = 1;
 }
 
+// Student group response message
 message GroupResponse {
     string group = 1;
 }
