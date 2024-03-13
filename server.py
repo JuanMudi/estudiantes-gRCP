@@ -1,7 +1,28 @@
 import grpc
 from concurrent import futures
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 import students_pb2
 import students_pb2_grpc
+
+uri = "mongodb+srv://admin:admin@studentsdatabase.rqetwo4.mongodb.net/?retryWrites=true&w=majority&appName=studentsDatabase"
+
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+   
+    # Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+     print(e)
+
+db = client["gRPC"]
+collection = db["students"]
+
+
+
 
 class StudentService(students_pb2_grpc.StudentServiceServicer):
     """
@@ -41,8 +62,10 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
         :param grpc.ServicerContext context: The context of the request
         """
         student_id = request.id
-        if student_id in self.student_data:
-            return students_pb2.NameResponse(full_name=self.student_data[student_id]['name'])
+        data = collection.find_one({"id": student_id})
+
+        if data is not None:
+            return students_pb2.NameResponse(full_name=data["nombre"])
         else:
             context.set_code(grpc.StatusCode.NOT_FOUND)
             context.set_details("Student not found.")
@@ -56,8 +79,11 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
         :param grpc.ServicerContext context: The context of the request
         """
         student_id = request.id
-        if student_id in self.student_data:
-            average = (self.student_data[student_id]['note1'] + self.student_data[student_id]['note2']) / 2
+
+        data = collection.find_one({"id": student_id})
+
+        if data is not None:
+            average = (data["taller_1"] + data["taller_2"]) / 2
             return students_pb2.AverageResponse(average=average)
         else:
             context.set_code(grpc.StatusCode.NOT_FOUND)
@@ -72,14 +98,17 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
         :param grpc.ServicerContext context: The context of the request
         """
         student_id = request.id
-        if student_id in self.student_data:
-            return students_pb2.GroupResponse(group=self.student_data[student_id]['group'])
+        data = collection.find_one({"id": student_id})
+
+        if data is not None:
+            return students_pb2.GroupResponse(group=data["grupo"])
         else:
             context.set_code(grpc.StatusCode.NOT_FOUND)
             context.set_details("Student not found.")
             return students_pb2.GroupResponse(group="")
 
 def serve():
+
     """
     Starts the gRPC server and listens on port 50020.
     """
