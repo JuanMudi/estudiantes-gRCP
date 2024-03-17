@@ -10,18 +10,15 @@ uri = "mongodb+srv://admin:admin@studentsdatabase.rqetwo4.mongodb.net/?retryWrit
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
-   
-    # Send a ping to confirm a successful connection
+# Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
-     print(e)
+    print(e)
 
 db = client["gRPC"]
 collection = db["students"]
-
-
 
 
 class StudentService(students_pb2_grpc.StudentServiceServicer):
@@ -36,6 +33,10 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
         :param grpc.ServicerContext context: The context of the request
         """
         student_id = request.id
+        client_ip = context.peer().split(':')[1]
+        client_port = context.peer().split(':')[2]
+        print(f"Resolving GetName request for student with id: {student_id} from {client_ip}:{client_port}")
+        
         data = collection.find_one({"id": student_id})
 
         if data is not None:
@@ -53,6 +54,9 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
         :param grpc.ServicerContext context: The context of the request
         """
         student_id = request.id
+        client_ip = context.peer().split(':')[1]
+        client_port = context.peer().split(':')[2]
+        print(f"Resolving GetAverage request for student with id: {student_id} from {client_ip}:{client_port}")
 
         data = collection.find_one({"id": student_id})
 
@@ -72,6 +76,10 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
         :param grpc.ServicerContext context: The context of the request
         """
         student_id = request.id
+        client_ip = context.peer().split(':')[1]
+        client_port = context.peer().split(':')[2]
+        print(f"Resolving GetGroup request for student with id: {student_id} from {client_ip}:{client_port}")
+
         data = collection.find_one({"id": student_id})
 
         if data is not None:
@@ -81,8 +89,8 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
             context.set_details("Student not found.")
             return students_pb2.GroupResponse(group="")
 
-def serve():
 
+def serve():
     """
     Starts the gRPC server and listens on port 50020.
     """

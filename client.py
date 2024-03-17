@@ -7,7 +7,7 @@ Run the client to call the server's methods
 """
     
 # Create a channel and a stub to server's IP address
-channel = grpc.insecure_channel('localhost:50020')  # Replace with the server's IP address
+channel = grpc.insecure_channel('54.242.48.225:50020')  # Replace with the server's IP address
 stub = students_pb2_grpc.StudentServiceStub(channel)
 
 
