@@ -28,32 +28,6 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
     """
     Implements the StudentService interface defined in students.proto.
     """
-
-    def __init__(self):
-        """
-        Class constructor. Initializes the data from file
-        """
-        self.student_data = self.read_student_data("students.csv")
-
-    def read_student_data(self, filename):
-        """
-        Reads the student data from the file students.txt and stores it in a dictionary.
-        
-        :param str filename: The name of the file to read the data from.
-        """
-        student_data = {}
-        with open(filename, "r") as file:
-            next(file)  # Skip header
-            for line in file:
-                group, id, name, note1, note2 = line.strip().split(';')
-                student_data[int(id)] = {
-                    'name': name,
-                    'note1': float(note1),
-                    'note2': float(note2),
-                    'group': group
-                }
-        return student_data
-
     def GetName(self, request, context):
         """
         Returns the name of the student with the given id.

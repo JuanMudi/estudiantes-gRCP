@@ -7,7 +7,7 @@ service StudentService {
     // Get student name by ID
     rpc GetName(StudentID) returns (NameResponse) {}
 
-    // Get student average grade by ID
+    // Get student average grade by ID or Name
     rpc GetAverage(StudentID) returns (AverageResponse) {}
 
     // Get student group by ID
