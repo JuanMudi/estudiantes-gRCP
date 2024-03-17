@@ -48,17 +48,23 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
 
     def GetAverage(self, request, context):
         """
-        Computes the average of the two notes of the student with the given id.
-        
-        :param students_pb2.IdRequest request: The request message containing the student id
+        Computes the average of the two notes of the student with the given id or name.
+
+        :param students_pb2.IdRequest request: The request message containing the student id or name
         :param grpc.ServicerContext context: The context of the request
         """
         student_id = request.id
         client_ip = context.peer().split(':')[1]
         client_port = context.peer().split(':')[2]
-        print(f"Resolving GetAverage request for student with id: {student_id} from {client_ip}:{client_port}")
+        print(f"Resolving GetAverage request for student with id or name: {student_id} from {client_ip}:{client_port}")
 
-        data = collection.find_one({"id": student_id})
+        # Check if student_id is numeric
+        if student_id.isdigit():
+            # If numeric, perform search by id
+            data = collection.find_one({"id": int(student_id)})
+        else:
+            # If alphanumeric, perform search by name or other field
+            data = collection.find_one({"nombre": student_id})  # Change "nombre" to the appropriate field
 
         if data is not None:
             average = (data["taller_1"] + data["taller_2"]) / 2
@@ -67,6 +73,7 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
             context.set_code(grpc.StatusCode.NOT_FOUND)
             context.set_details("Student not found.")
             return students_pb2.AverageResponse(average=0)
+
 
     def GetGroup(self, request, context):
         """

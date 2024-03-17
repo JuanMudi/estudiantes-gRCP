@@ -14,18 +14,18 @@ stub = students_pb2_grpc.StudentServiceStub(channel)
 def API(service):
         
         try:
-            data = int(input("Ingrese el ID del estudiante: "))
+            data = input("Ingrese el ID del estudiante: ")
         except ValueError:
             print("\nOPCIÓN INVALIDA\n")
             return
 
 
         if service == 1:
-            print("Name: " + (stub.GetName(students_pb2.StudentID(id=data))).full_name)
+            print("Name: " + (stub.GetName(students_pb2.StudentID(id=int(data)))).full_name)
         if service == 2:
             print("Average:" + str((stub.GetAverage(students_pb2.StudentID(id=data))).average))
         if service == 3:       
-            print("Group: " + (stub.GetGroup(students_pb2.StudentID(id=data))).group)
+            print("Group: " + (stub.GetGroup(students_pb2.StudentID(id=int(data)))).group)
 
 def run():
     
