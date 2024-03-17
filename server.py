@@ -54,17 +54,18 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
         :param grpc.ServicerContext context: The context of the request
         """
         student_id = request.id
+        student_name = request.nombre
         client_ip = context.peer().split(':')[1]
         client_port = context.peer().split(':')[2]
         print(f"Resolving GetAverage request for student with id or name: {student_id} from {client_ip}:{client_port}")
 
         # Check if student_id is numeric
-        if student_id.isdigit():
+        if student_id != 1:
             # If numeric, perform search by id
             data = collection.find_one({"id": int(student_id)})
         else:
             # If alphanumeric, perform search by name or other field
-            data = collection.find_one({"nombre": student_id})  # Change "nombre" to the appropriate field
+            data = collection.find_one({"nombre": student_id}) 
 
         if data is not None:
             average = (data["taller_1"] + data["taller_2"]) / 2

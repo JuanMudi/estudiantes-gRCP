@@ -17,6 +17,7 @@ service StudentService {
 // Student ID message
 message StudentID {
     int32 id = 1;
+    string nombre = 2;
 }
 
 // Student name response message

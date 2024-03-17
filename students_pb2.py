@@ -7,11 +7,10 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
-
-
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0estudents.proto\x12\x08students\"\x17\n\tStudentID\x12\n\n\x02id\x18\x01 \x01(\x05\"!\n\x0cNameResponse\x12\x11\n\tfull_name\x18\x01 \x01(\t\"\"\n\x0f\x41verageResponse\x12\x0f\n\x07\x61verage\x18\x01 \x01(\x02\"\x1e\n\rGroupResponse\x12\r\n\x05group\x18\x01 \x01(\t2\xc6\x01\n\x0eStudentService\x12\x38\n\x07GetName\x12\x13.students.StudentID\x1a\x16.students.NameResponse\"\x00\x12>\n\nGetAverage\x12\x13.students.StudentID\x1a\x19.students.AverageResponse\"\x00\x12:\n\x08GetGroup\x12\x13.students.StudentID\x1a\x17.students.GroupResponse\"\x00\x62\x06proto3')

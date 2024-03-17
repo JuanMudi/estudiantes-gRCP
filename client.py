@@ -1,13 +1,13 @@
-import grpc
 import students_pb2
 import students_pb2_grpc
+import grpc
 
 """
 Run the client to call the server's methods
 """
     
 # Create a channel and a stub to server's IP address
-channel = grpc.insecure_channel('54.242.48.225:50020')  # Replace with the server's IP address
+channel = grpc.insecure_channel('52.87.167.205:50020')  # Replace with the server's IP address
 stub = students_pb2_grpc.StudentServiceStub(channel)
 
 
@@ -23,7 +23,13 @@ def API(service):
         if service == 1:
             print("Name: " + (stub.GetName(students_pb2.StudentID(id=int(data)))).full_name)
         if service == 2:
-            print("Average:" + str((stub.GetAverage(students_pb2.StudentID(id=data))).average))
+                # Check if student_id is numeric
+            if data.isdigit():
+                # If numeric, perform search by id
+                print("Average:" + str((stub.GetAverage(students_pb2.StudentID(id=int(data)))).average))
+            else:
+                # If alphanumeric, perform search by name or other field
+                print("Average:" + str((stub.GetAverage(students_pb2.StudentID(nombre=data))).average))
         if service == 3:       
             print("Group: " + (stub.GetGroup(students_pb2.StudentID(id=int(data)))).group)
 

@@ -6,7 +6,8 @@ import students_pb2 as students__pb2
 
 
 class StudentServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """Student grade management service
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -32,22 +33,26 @@ class StudentServiceStub(object):
 
 
 class StudentServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """Student grade management service
+    """
 
     def GetName(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Get student name by ID
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAverage(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Get student average grade by ID or Name
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetGroup(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Get student group by ID
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -78,7 +83,8 @@ def add_StudentServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class StudentService(object):
-    """Missing associated documentation comment in .proto file."""
+    """Student grade management service
+    """
 
     @staticmethod
     def GetName(request,
