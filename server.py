@@ -65,7 +65,7 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
             data = collection.find_one({"id": int(student_id)})
         else:
             # If alphanumeric, perform search by name or other field
-            data = collection.find_one({"nombre": student_id}) 
+            data = collection.find_one({"nombre": student_name}) 
 
         if data is not None:
             average = (data["taller_1"] + data["taller_2"]) / 2
