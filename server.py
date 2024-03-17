@@ -60,7 +60,7 @@ class StudentService(students_pb2_grpc.StudentServiceServicer):
         print(f"Resolving GetAverage request for student with id or name: {student_id} from {client_ip}:{client_port}")
 
         # Check if student_id is numeric
-        if student_id != 1:
+        if student_id != 0:
             # If numeric, perform search by id
             data = collection.find_one({"id": int(student_id)})
         else:
